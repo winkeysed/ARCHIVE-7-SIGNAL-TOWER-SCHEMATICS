@@ -17,11 +17,7 @@
   --scanline: rgba(0, 0, 0, 0.3);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
   background: var(--term-bg);
@@ -34,17 +30,12 @@ body {
   position: relative;
 }
 
-/* CRT overlay */
 body::before {
   content: "";
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    var(--scanline) 2px,
-    var(--scanline) 4px
+    0deg, transparent, transparent 2px, var(--scanline) 2px, var(--scanline) 4px
   );
   pointer-events: none;
   z-index: 1000;
@@ -73,7 +64,6 @@ body::after {
   z-index: 10;
 }
 
-/* Header */
 .header {
   border: 2px solid var(--term-dim);
   padding: 20px;
@@ -93,13 +83,8 @@ body::after {
   font-size: 14px;
 }
 
-.blink {
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
-}
+.blink { animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
 
 h1 {
   color: var(--term-amber);
@@ -114,7 +99,6 @@ h1 {
   font-size: 14px;
 }
 
-/* Navigation */
 .nav {
   display: flex;
   gap: 10px;
@@ -137,7 +121,6 @@ h1 {
   box-shadow: 0 0 10px var(--term-fg);
 }
 
-/* Sections */
 .section {
   border: 1px solid var(--term-dim);
   padding: 20px;
@@ -164,7 +147,6 @@ h1 {
   padding-bottom: 5px;
 }
 
-/* ASCII Art */
 .ascii-art {
   color: var(--term-cyan);
   font-size: 12px;
@@ -175,30 +157,59 @@ h1 {
   text-shadow: 0 0 5px var(--term-cyan);
 }
 
-/* Log entries */
-.log-entry {
-  border-left: 2px solid var(--term-dim);
-  padding-left: 15px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.log-entry::before {
-  content: ">";
-  position: absolute;
-  left: -8px;
-  color: var(--term-amber);
-}
-
-.log-date {
-  color: var(--term-dim);
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.log-author {
+.warning {
+  border: 2px solid var(--term-red);
+  padding: 15px;
+  margin: 20px 0;
+  background: rgba(50, 0, 0, 0.3);
   color: var(--term-red);
-  font-size: 14px;
+}
+
+.download-btn {
+  display: inline-block;
+  border: 2px solid var(--term-amber);
+  color: var(--term-amber);
+  padding: 12px 24px;
+  text-decoration: none;
+  margin: 10px 10px 10px 0;
+  transition: all 0.2s;
+  cursor: pointer;
+  background: transparent;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+}
+
+.download-btn:hover {
+  background: var(--term-amber);
+  color: var(--term-bg);
+  box-shadow: 0 0 15px var(--term-amber);
+}
+
+.grid-table {
+  border-collapse: collapse;
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.grid-table td, .grid-table th {
+  border: 1px solid var(--term-dim);
+  padding: 8px 12px;
+  text-align: center;
+  min-width: 36px;
+}
+
+.grid-table th {
+  color: var(--term-amber);
+  background: rgba(0, 30, 0, 0.5);
+}
+
+.grid-table td {
+  color: var(--term-fg);
+}
+
+.grid-table td:hover {
+  background: var(--term-dim);
+  cursor: default;
 }
 
 .glitch {
@@ -240,21 +251,6 @@ h1 {
   100% { transform: translateX(0); }
 }
 
-/* Schematic layers */
-.layer {
-  border: 1px dashed var(--term-dim);
-  padding: 15px;
-  margin-bottom: 15px;
-  background: rgba(0, 10, 0, 0.5);
-}
-
-.layer-title {
-  color: var(--term-amber);
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-/* Status bar */
 .status-bar {
   position: fixed;
   bottom: 0;
@@ -269,92 +265,21 @@ h1 {
   z-index: 100;
 }
 
-.status-bar span {
-  color: var(--term-dim);
-}
+.status-bar span { color: var(--term-dim); }
+.status-bar .live { color: var(--term-red); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-.status-bar .live {
-  color: var(--term-red);
-  animation: pulse 2s infinite;
-}
+.footer-spacer { height: 60px; }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--term-bg); }
+::-webkit-scrollbar-thumb { background: var(--term-dim); }
+::-webkit-scrollbar-thumb:hover { background: var(--term-fg); }
 
-/* Warning box */
-.warning {
-  border: 2px solid var(--term-red);
-  padding: 15px;
-  margin: 20px 0;
-  background: rgba(50, 0, 0, 0.3);
-  color: var(--term-red);
-}
-
-/* Schematic blocks */
-.block-grid {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 2px;
-  max-width: 300px;
-  margin: 10px auto;
-}
-
-.block-cell {
-  aspect-ratio: 1;
-  border: 1px solid var(--term-dim);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  color: var(--term-dim);
-}
-
-.block-iron { background: rgba(180, 180, 180, 0.3); color: #ccc; }
-.block-redstone { background: rgba(200, 0, 0, 0.3); color: #f44; }
-.block-gold { background: rgba(255, 200, 0, 0.3); color: #fc0; }
-.block-obsidian { background: rgba(40, 0, 60, 0.5); color: #a0a; }
-.block-glass { background: rgba(200, 240, 255, 0.2); color: #aff; }
-.block-air { border-style: dashed; }
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--term-bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--term-dim);
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--term-fg);
-}
-
-/* Typewriter effect */
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3s steps(60, end);
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-/* Footer spacer */
-.footer-spacer {
-  height: 60px;
-}
-
-/* Mobile */
 @media (max-width: 600px) {
   body { font-size: 14px; }
   h1 { font-size: 22px; }
   .ascii-art { font-size: 8px; }
-  .block-grid { grid-template-columns: repeat(7, 1fr); }
 }
 </style>
 <base target="_blank">
@@ -373,9 +298,9 @@ h1 {
 
   <div class="nav">
     <a onclick="showSection('overview')" id="nav-overview" class="active">[ OVERVIEW ]</a>
-    <a onclick="showSection('schematic')" id="nav-schematic">[ SCHEMATIC ]</a>
+    <a onclick="showSection('cipher')" id="nav-cipher">[ CIPHER ]</a>
+    <a onclick="showSection('downloads')" id="nav-downloads">[ DOWNLOADS ]</a>
     <a onclick="showSection('logs')" id="nav-logs">[ LOGS ]</a>
-    <a onclick="showSection('lore')" id="nav-lore">[ LORE ]</a>
     <a onclick="showSection('warnings')" id="nav-warnings">[ WARNINGS ]</a>
   </div>
 
@@ -398,13 +323,13 @@ h1 {
     </p>
 
     <p style="margin-bottom:15px;">
-      <span style="color:var(--term-amber)">>> ORIGIN:</span> Recovered from 4 fragmented data caches located 
+      <span style="color:var(--term-amber)">>> ORIGIN:</span> Recovered from fragmented data caches located 
       in anomalous biomes. Decoded via base64 transmission protocol.
     </p>
 
     <p style="margin-bottom:15px;">
       <span style="color:var(--term-amber)">>> STATUS:</span> <span style="color:var(--term-red)">SCHEMATIC INCOMPLETE</span> — 
-      Some layers corrupted during transmission. Reconstruction possible.
+      Additional data required. See DOWNLOADS section.
     </p>
 
     <div class="warning">
@@ -413,71 +338,95 @@ h1 {
       Do not assume safety is absolute.
     </div>
 
-    <div class="layer" style="margin-top:20px;">
-      <div class="layer-title">/// TOWER SPECIFICATIONS ///</div>
-      <pre style="color:var(--term-dim); line-height:1.6;">
+    <div style="margin-top:20px; border:1px solid var(--term-dim); padding:15px;">
+      <div class="section-title" style="border:none; padding:0;">/// TOWER SPECIFICATIONS ///</div>
+      <pre style="color:var(--term-dim); line-height:1.6; margin-top:10px;">
 Height:        12 blocks
 Base:          5x5 iron frame
 Core:          Redstone + Obsidian resonator
 Antenna:       Gold-conductive rod (4 blocks)
-Power:         Self-sustaining (no external source required)
+Power:         Self-sustaining
 Effective:     96 block radius (6 chunks)
       </pre>
     </div>
   </div>
 
-  <!-- SCHEMATIC -->
-  <div id="schematic" class="section">
-    <div class="section-title">/// CONSTRUCTION SCHEMATIC ///</div>
-    <p style="color:var(--term-dim); margin-bottom:15px;">Hover over layers to inspect. Build from bottom to top.</p>
+  <!-- CIPHER -->
+  <div id="cipher" class="section">
+    <div class="section-title">/// COORDINATE CIPHER ///</div>
+    <p style="color:var(--term-dim); margin-bottom:15px;">
+      Fragmented transmissions recovered from data caches use a coordinate-based encoding.
+      Each two-digit number maps to a position on the grid below.
+    </p>
 
-    <div class="layer">
-      <div class="layer-title">LAYER 1-2 — FOUNDATION (5x5)</div>
-      <div class="block-grid">
-        <div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div>
-        <div class="block-cell block-iron">I</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-iron">I</div>
-        <div class="block-cell block-iron">I</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-redstone">R</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-iron">I</div>
-        <div class="block-cell block-iron">I</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-obsidian">O</div><div class="block-cell block-iron">I</div>
-        <div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div><div class="block-cell block-iron">I</div>
-      </div>
-      <p style="text-align:center; color:var(--term-dim); font-size:12px; margin-top:5px;">I=Iron Block | O=Obsidian | R=Redstone Block</p>
-    </div>
+    <table class="grid-table">
+      <tr>
+        <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+      </tr>
+      <tr>
+        <th>1</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td>
+      </tr>
+      <tr>
+        <th>2</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td>
+      </tr>
+      <tr>
+        <th>3</th><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td>
+      </tr>
+      <tr>
+        <th>4</th><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>0</td><td>1</td>
+      </tr>
+      <tr>
+        <th>5</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+      </tr>
+      <tr>
+        <th>6</th><td>9</td><td>.</td><td>-</td><td>_</td><td>/</td><td>:</td><td>@</td>
+      </tr>
+    </table>
 
-    <div class="layer">
-      <div class="layer-title">LAYER 3-6 — RESONATOR CHAMBER (3x3)</div>
-      <div class="block-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 120px;">
-        <div class="block-cell block-glass">G</div><div class="block-cell block-glass">G</div><div class="block-cell block-glass">G</div>
-        <div class="block-cell block-glass">G</div><div class="block-cell block-redstone">R</div><div class="block-cell block-glass">G</div>
-        <div class="block-cell block-glass">G</div><div class="block-cell block-glass">G</div><div class="block-cell block-glass">G</div>
-      </div>
-      <p style="text-align:center; color:var(--term-dim); font-size:12px; margin-top:5px;">G=Glass | R=Redstone Block (core)</p>
-    </div>
-
-    <div class="layer">
-      <div class="layer-title">LAYER 7-10 — CONDUCTIVE SHAFT (1x1)</div>
-      <div style="text-align:center; margin:10px 0;">
-        <div class="block-cell block-gold" style="width:40px; height:40px; margin:2px auto; font-size:16px;">Au</div>
-        <div class="block-cell block-gold" style="width:40px; height:40px; margin:2px auto; font-size:16px;">Au</div>
-        <div class="block-cell block-gold" style="width:40px; height:40px; margin:2px auto; font-size:16px;">Au</div>
-        <div class="block-cell block-gold" style="width:40px; height:40px; margin:2px auto; font-size:16px;">Au</div>
-      </div>
-      <p style="text-align:center; color:var(--term-dim); font-size:12px;">Au=Gold Block (vertical stack)</p>
-    </div>
-
-    <div class="layer">
-      <div class="layer-title">LAYER 11-12 — ANTENNA ARRAY (3x3)</div>
-      <div class="block-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 120px;">
-        <div class="block-cell block-air">·</div><div class="block-cell block-iron">I</div><div class="block-cell block-air">·</div>
-        <div class="block-cell block-iron">I</div><div class="block-cell block-gold">Au</div><div class="block-cell block-iron">I</div>
-        <div class="block-cell block-air">·</div><div class="block-cell block-iron">I</div><div class="block-cell block-air">·</div>
-      </div>
-      <p style="text-align:center; color:var(--term-dim); font-size:12px; margin-top:5px;">Cross-shaped antenna tip</p>
-    </div>
+    <p style="color:var(--term-dim); margin-top:15px; font-size:14px;">
+      First digit = row. Second digit = column.<br>
+      Example: 23 = I, 45 = Z, 62 = .
+    </p>
 
     <div class="warning" style="margin-top:20px;">
-      <strong>⚠ NOTE:</strong> Upon completion, the tower will auto-activate. 
-      A faint hum will be audible to nearby players. This is normal. 
-      <span class="glitch" data-text="DO NOT ATTEMPT TO SILENCE">DO NOT ATTEMPT TO SILENCE</span>.
+      <strong>⚠ NOTE:</strong> Coordinates are scattered across multiple data fragments. 
+      Collect all fragments before attempting decryption. Use the decoder tool in DOWNLOADS.
+    </div>
+  </div>
+
+  <!-- DOWNLOADS -->
+  <div id="downloads" class="section">
+    <div class="section-title">/// AVAILABLE FILES ///</div>
+
+    <p style="margin-bottom:20px; color:var(--term-dim);">
+      The following files have been recovered from fragmented caches. 
+      Download and use locally.
+    </p>
+
+    <div style="border:1px solid var(--term-dim); padding:20px; margin-bottom:20px;">
+      <div style="color:var(--term-amber); margin-bottom:10px;">[ FILE_01 ] signal_decoder.py</div>
+      <p style="color:var(--term-dim); margin-bottom:15px; font-size:14px;">
+        Coordinate grid decoder. Python 3.6+, no dependencies.
+        Run locally, paste your collected coordinates.
+      </p>
+      <a href="https://github.com/winkeysed/python-decoder" target="_blank" class="download-btn">
+        [ DOWNLOAD DECODER ]
+      </a>
+    </div>
+
+    <div style="border:1px solid var(--term-dim); padding:20px; margin-bottom:20px;">
+      <div style="color:var(--term-amber); margin-bottom:10px;">[ FILE_02 ] tower_schematic.litematic</div>
+      <p style="color:var(--term-dim); margin-bottom:15px; font-size:14px;">
+        Signal tower construction data. Import into Litematica for in-world overlay.
+      </p>
+      <a href="https://google.com" target="_blank" class="download-btn">
+        [ DOWNLOAD SCHEMATIC ]
+      </a>
+    </div>
+
+    <div class="warning">
+      <strong>⚠ WARNING:</strong> Do not share decoded coordinates publicly. 
+      The source of these transmissions has not been verified.
     </div>
   </div>
 
@@ -485,111 +434,34 @@ Effective:     96 block radius (6 chunks)
   <div id="logs" class="section">
     <div class="section-title">/// RECOVERED LOG FRAGMENTS ///</div>
 
-    <div class="log-entry">
-      <div class="log-date">[ DAY 1 — CYCLE 4 ]</div>
-      <div class="log-author">Dr. V. Kessler</div>
-      <p>
-        The first prototype is operational. We placed it at the edge of the Faded Lands 
-        and observed the entities for six hours. They stopped at the perimeter. 
-        Just... stopped. Stared. I don't know which is worse — them attacking, or them 
-        <em>watching</em>.
-      </p>
+    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
+      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 1 — CYCLE 4 ]</div>
+      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Dr. V. Kessler</div>
+      <p>First prototype operational. Placed at the edge of the Faded Lands. Entities stopped at the perimeter. Just... stopped. Stared.</p>
     </div>
 
-    <div class="log-entry">
-      <div class="log-date">[ DAY 12 — CYCLE 4 ]</div>
-      <div class="log-author">Eng. M. Thorne</div>
-      <p>
-        Third tower constructed. The frequency is stable at 18.7 kHz. We can't hear it, 
-        but the dogs can. They refuse to enter the safe zone. Maybe we're not meant to 
-        understand what we're building. Maybe we're just assembling someone else's design.
-      </p>
+    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
+      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 12 — CYCLE 4 ]</div>
+      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Eng. M. Thorne</div>
+      <p>Third tower constructed. Frequency stable at 18.7 kHz. Dogs refuse to enter the safe zone. Maybe we are not meant to understand what we are building.</p>
     </div>
 
-    <div class="log-entry">
-      <div class="log-date">[ DAY 27 — CYCLE 4 ]</div>
-      <div class="log-author">Dr. V. Kessler</div>
-      <p>
-        The Blooded Eye was sighted above Tower 2 today. It didn't attack. It circled 
-        the antenna three times and left. I think it's studying us. Or studying 
-        <em>them</em>. I don't know anymore.
-      </p>
+    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
+      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 27 — CYCLE 4 ]</div>
+      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Dr. V. Kessler</div>
+      <p>The Blooded Eye was sighted above Tower 2 today. It circled the antenna three times and left. I think it is studying us.</p>
     </div>
 
-    <div class="log-entry">
-      <div class="log-date">[ DAY 31 — CYCLE 4 ]</div>
-      <div class="log-author" style="color:var(--term-red)">[ DATA CORRUPTED ]</div>
-      <p class="glitch" data-text="they are not afraid of the noise they are waiting for something they are waiting for">
-        they are not afraid of the noise they are waiting for something they are waiting for
-      </p>
+    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
+      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 31 — CYCLE 4 ]</div>
+      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">[ DATA CORRUPTED ]</div>
+      <p style="color:var(--term-red);">they are not afraid of the noise they are waiting for something they are waiting for</p>
     </div>
 
-    <div class="log-entry">
-      <div class="log-date">[ DAY ?? — CYCLE ? ]</div>
-      <div class="log-author">Unknown</div>
-      <p style="color:var(--term-dim);">
-        [ STATIC ] ...the towers were never meant to protect us. They were meant to 
-        <span style="color:var(--term-red)">[ SIGNAL ]</span> ...someone is listening on 
-        the other side of the static... [ TRANSMISSION ENDS ]
-      </p>
-    </div>
-  </div>
-
-  <!-- LORE -->
-  <div id="lore" class="section">
-    <div class="section-title">/// ENTITY DATABASE ///</div>
-
-    <div class="layer">
-      <div class="layer-title" style="color:var(--term-red)">ENTITY: THE LOCUST</div>
-      <pre style="color:var(--term-dim); margin-bottom:10px;">
-Designation:    Hostile / Nocturnal / Photophobic
-Height:         ~3.2 meters (extended)
-Behavior:       Hunts during darkness. Avoids light sources >7 lumens.
-                Teleports in 2-3 block bursts when pursuing prey.
-                Does NOT enter water, boats, or open trapdoors.
-Frequency:      43% chance of manifestation per night cycle.
-Weakness:       High-frequency emission (Signal Tower range)
-      </pre>
-      <p>
-        First encountered in the Faded Lands. Witnesses describe a "wrong" body — 
-        limbs too long, movement that "skips frames" like corrupted video. 
-        It does not eat. It does not sleep. It <em>hunts</em>.
-      </p>
-    </div>
-
-    <div class="layer">
-      <div class="layer-title" style="color:var(--term-cyan)">ENTITY: BLOODED EYE</div>
-      <pre style="color:var(--term-dim); margin-bottom:10px;">
-Designation:    Passive / Aerial / Observational
-Height:         ~1.8 meters (wingspan ~4 meters)
-Behavior:       Maintains altitude of 40-60 blocks. No aggressive actions recorded.
-                Pupil dilates when observing subjects. Disappears when unobserved.
-                Multiple instances may focus on a single target simultaneously.
-Frequency:      Unknown. Appears without pattern.
-Weakness:       None documented.
-      </pre>
-      <p>
-        The Blooded Eye does not hunt. It <em>witnesses</em>. Some survivors claim 
-        it appears before major events — tower activations, mass entity migrations, 
-        or the arrival of new "guests" in the Faded Lands. 
-      </p>
-      <p style="margin-top:10px; color:var(--term-dim);">
-        Theories suggest it is not an entity at all, but a <em>sensor</em> — 
-        an organ of something far larger that exists beyond the fog.
-      </p>
-    </div>
-
-    <div class="layer">
-      <div class="layer-title">/// THE FADED LANDS ///</div>
-      <p>
-        A biome that should not exist. Grass bleached white. Trees stripped of leaves, 
-        frozen in silent agony. The fog is not weather — it is <em>memory</em>, 
-        the residue of whatever happened here.
-      </p>
-      <p style="margin-top:10px;">
-        Staying longer than four minutes attracts attention. Not from the fog. 
-        From what lives <em>inside</em> it.
-      </p>
+    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
+      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY ?? — CYCLE ? ]</div>
+      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Unknown</div>
+      <p style="color:var(--term-dim);">[ STATIC ] ...the towers were never meant to protect us. They were meant to <span style="color:var(--term-red)">[ SIGNAL ]</span> ...someone is listening...</p>
     </div>
   </div>
 
@@ -598,26 +470,19 @@ Weakness:       None documented.
     <div class="section-title">/// OPERATIONAL WARNINGS ///</div>
 
     <div class="warning">
-      <strong>⚠ WARNING-001:</strong> Do not construct multiple towers within 
-      overlapping ranges. Frequency interference has been observed to 
-      <span style="color:var(--term-red)">attract</span> rather than repel.
+      <strong>⚠ WARNING-001:</strong> Do not construct multiple towers within overlapping ranges. Frequency interference has been observed to <span style="color:var(--term-red)">attract</span> rather than repel.
     </div>
 
     <div class="warning">
-      <strong>⚠ WARNING-002:</strong> If The Locust is spotted <em>inside</em> a 
-      safe zone, the tower has failed. Do not attempt repair. Evacuate immediately.
+      <strong>⚠ WARNING-002:</strong> If The Locust is spotted inside a safe zone, the tower has failed. Do not attempt repair. Evacuate immediately.
     </div>
 
     <div class="warning">
-      <strong>⚠ WARNING-003:</strong> The Blooded Eye has never been observed 
-      blinking. If you see it close its eye, 
-      <span class="glitch" data-text="RUN">RUN</span>.
+      <strong>⚠ WARNING-003:</strong> The Blooded Eye has never been observed blinking. If you see it close its eye, <span class="glitch" data-text="RUN">RUN</span>.
     </div>
 
     <div class="warning">
-      <strong>⚠ WARNING-004:</strong> This archive is not complete. Four fragments 
-      were required for full reconstruction. If you are reading this, at least one 
-      fragment is still out there. Someone may have intentionally hidden it.
+      <strong>⚠ WARNING-004:</strong> This archive is not complete. Additional data fragments are required for full reconstruction.
     </div>
 
     <div style="margin-top:30px; color:var(--term-dim); text-align:center;">
@@ -650,13 +515,11 @@ function showSection(id) {
 
 function updateClock() {
   const now = new Date();
-  const time = now.toTimeString().split(' ')[0];
-  document.getElementById('clock').textContent = time;
+  document.getElementById('clock').textContent = now.toTimeString().split(' ')[0];
 }
 setInterval(updateClock, 1000);
 updateClock();
 
-// Random glitch effect on text
 setInterval(() => {
   const glitches = document.querySelectorAll('.glitch');
   const target = glitches[Math.floor(Math.random() * glitches.length)];
@@ -666,7 +529,6 @@ setInterval(() => {
   }
 }, 3000);
 
-// Random console messages in status bar
 const messages = [
   'SCANNING FREQUENCY...',
   'ENTITY DETECTED: NONE',
