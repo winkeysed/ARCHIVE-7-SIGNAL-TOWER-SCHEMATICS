@@ -3,546 +3,521 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARCHIVE-7 // SIGNAL TOWER SCHEMATICS</title>
+<title>АРХИВ-7 // ВЫЦВЕТШИЕ ЗЕМЛИ</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
-:root {
-  --term-bg: #0a0f0a;
-  --term-fg: #33ff33;
-  --term-dim: #1a5c1a;
-  --term-amber: #ffb000;
-  --term-red: #ff3333;
-  --term-cyan: #00ffff;
-  --scanline: rgba(0, 0, 0, 0.3);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
-  background: var(--term-bg);
-  color: var(--term-fg);
-  font-family: 'VT323', 'Courier New', monospace;
-  font-size: 18px;
-  line-height: 1.4;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px, var(--scanline) 2px, var(--scanline) 4px
-  );
-  pointer-events: none;
-  z-index: 1000;
-  animation: flicker 0.15s infinite;
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,20,0,0.6) 100%);
-  pointer-events: none;
-  z-index: 1001;
-}
-
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.98; }
-}
-
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  position: relative;
-  z-index: 10;
-}
-
-.header {
-  border: 2px solid var(--term-dim);
-  padding: 20px;
-  margin-bottom: 30px;
-  background: rgba(0, 20, 0, 0.3);
-  position: relative;
-}
-
-.header::before {
-  content: "[ TERMINAL ACCESS GRANTED ]";
-  position: absolute;
-  top: -12px;
-  left: 20px;
-  background: var(--term-bg);
-  padding: 0 10px;
-  color: var(--term-amber);
+  background: #000;
+  color: #0f0;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
-.blink { animation: blink 1s step-end infinite; }
-@keyframes blink { 50% { opacity: 0; } }
+a {
+  color: #0ff;
+  text-decoration: underline;
+}
 
-h1 {
-  color: var(--term-amber);
-  font-size: 32px;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px var(--term-amber);
+a:hover {
+  background: #0f0;
+  color: #000;
+}
+
+h1, h2, h3 {
+  color: #ff0;
+  font-weight: bold;
+  margin-top: 30px;
   margin-bottom: 10px;
 }
 
-.subtitle {
-  color: var(--term-dim);
-  font-size: 14px;
-}
-
-.nav {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-
-.nav a {
-  color: var(--term-fg);
-  text-decoration: none;
-  border: 1px solid var(--term-dim);
-  padding: 8px 16px;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-
-.nav a:hover, .nav a.active {
-  background: var(--term-fg);
-  color: var(--term-bg);
-  box-shadow: 0 0 10px var(--term-fg);
-}
-
-.section {
-  border: 1px solid var(--term-dim);
-  padding: 20px;
-  margin-bottom: 20px;
-  background: rgba(0, 15, 0, 0.4);
-  display: none;
-}
-
-.section.active {
-  display: block;
-  animation: fadeIn 0.5s;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.section-title {
-  color: var(--term-amber);
-  font-size: 22px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid var(--term-dim);
+h1 {
+  font-size: 18px;
+  border-bottom: 2px solid #0f0;
   padding-bottom: 5px;
 }
 
-.ascii-art {
-  color: var(--term-cyan);
-  font-size: 12px;
-  line-height: 1.2;
-  white-space: pre;
+h2 {
+  font-size: 16px;
+  color: #0f0;
+}
+
+h3 {
+  font-size: 14px;
+  color: #ff0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #0f0;
+  margin: 20px 0;
+}
+
+pre {
+  background: #001100;
+  padding: 10px;
   overflow-x: auto;
-  margin: 15px 0;
-  text-shadow: 0 0 5px var(--term-cyan);
+  border: 1px solid #0f0;
 }
 
 .warning {
-  border: 2px solid var(--term-red);
-  padding: 15px;
-  margin: 20px 0;
-  background: rgba(50, 0, 0, 0.3);
-  color: var(--term-red);
+  color: #f00;
+  border: 1px solid #f00;
+  padding: 10px;
+  margin: 15px 0;
 }
 
-.download-btn {
-  display: inline-block;
-  border: 2px solid var(--term-amber);
-  color: var(--term-amber);
-  padding: 12px 24px;
-  text-decoration: none;
-  margin: 10px 10px 10px 0;
-  transition: all 0.2s;
-  cursor: pointer;
-  background: transparent;
-  font-family: 'VT323', monospace;
-  font-size: 16px;
+.note {
+  color: #888;
+  font-size: 12px;
 }
 
-.download-btn:hover {
-  background: var(--term-amber);
-  color: var(--term-bg);
-  box-shadow: 0 0 15px var(--term-amber);
-}
-
-.grid-table {
+table {
   border-collapse: collapse;
   margin: 15px 0;
-  font-size: 16px;
 }
 
-.grid-table td, .grid-table th {
-  border: 1px solid var(--term-dim);
-  padding: 8px 12px;
+table, th, td {
+  border: 1px solid #0f0;
+}
+
+th, td {
+  padding: 6px 10px;
   text-align: center;
-  min-width: 36px;
 }
 
-.grid-table th {
-  color: var(--term-amber);
-  background: rgba(0, 30, 0, 0.5);
+th {
+  background: #003300;
 }
 
-.grid-table td {
-  color: var(--term-fg);
+.nav {
+  margin: 20px 0;
 }
 
-.grid-table td:hover {
-  background: var(--term-dim);
-  cursor: default;
+.nav a {
+  margin-right: 15px;
 }
 
-.glitch {
-  position: relative;
+.footer {
+  margin-top: 40px;
+  color: #555;
+  font-size: 12px;
+  border-top: 1px solid #333;
+  padding-top: 10px;
 }
 
-.glitch::before, .glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
+.blink {
+  animation: blink 1s step-end infinite;
 }
 
-.glitch::before {
-  color: var(--term-red);
-  animation: glitch-1 2s infinite linear alternate-reverse;
-  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
-.glitch::after {
-  color: var(--term-cyan);
-  animation: glitch-2 3s infinite linear alternate-reverse;
-  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+/* --- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА --- */
+.lang-header {
+  text-align: right;
+  margin-bottom: 15px;
 }
 
-@keyframes glitch-1 {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-2px); }
-  40% { transform: translateX(2px); }
-  60% { transform: translateX(-1px); }
-  80% { transform: translateX(1px); }
-  100% { transform: translateX(0); }
+.lang-btn {
+  background: #000;
+  color: #0f0;
+  border: 1px solid #0f0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  padding: 5px 12px;
+  cursor: pointer;
+  outline: none;
 }
 
-@keyframes glitch-2 {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(2px); }
-  50% { transform: translateX(-2px); }
-  75% { transform: translateX(1px); }
-  100% { transform: translateX(0); }
+.lang-btn:hover {
+  background: #0f0;
+  color: #000;
+  font-weight: bold;
 }
 
-.status-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--term-bg);
-  border-top: 2px solid var(--term-dim);
-  padding: 8px 20px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  z-index: 100;
+.lang-en, .lang-ru {
+  display: none;
 }
 
-.status-bar span { color: var(--term-dim); }
-.status-bar .live { color: var(--term-red); animation: pulse 2s infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+body.lang-ru .lang-ru {
+  display: inline;
+}
 
-.footer-spacer { height: 60px; }
+body.lang-ru pre.lang-ru,
+body.lang-ru div.lang-ru,
+body.lang-ru p.lang-ru,
+body.lang-ru h1.lang-ru,
+body.lang-ru h2.lang-ru,
+body.lang-ru h3.lang-ru {
+  display: block;
+}
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--term-bg); }
-::-webkit-scrollbar-thumb { background: var(--term-dim); }
-::-webkit-scrollbar-thumb:hover { background: var(--term-fg); }
+body.lang-en .lang-en {
+  display: inline;
+}
 
-@media (max-width: 600px) {
-  body { font-size: 14px; }
-  h1 { font-size: 22px; }
-  .ascii-art { font-size: 8px; }
+body.lang-en pre.lang-en,
+body.lang-en div.lang-en,
+body.lang-en p.lang-en,
+body.lang-en h1.lang-en,
+body.lang-en h2.lang-en,
+body.lang-en h3.lang-en {
+  display: block;
 }
 </style>
-<base target="_blank">
 </head>
-<body>
+<body class="lang-ru">
 
-<div class="container">
-
-  <div class="header">
-    <h1 class="glitch" data-text="ARCHIVE-7 // SIGNAL TOWER SCHEMATICS">ARCHIVE-7 // SIGNAL TOWER SCHEMATICS</h1>
-    <div class="subtitle">RESTORED FROM FRAGMENTED DATA — CLEARANCE LEVEL: SURVIVOR</div>
-    <div class="subtitle" style="margin-top:8px; color: var(--term-dim);">
-      [ CONNECTION: UNSTABLE ] <span class="blink">_</span>
-    </div>
-  </div>
-
-  <div class="nav">
-    <a onclick="showSection('overview')" id="nav-overview" class="active">[ OVERVIEW ]</a>
-    <a onclick="showSection('cipher')" id="nav-cipher">[ CIPHER ]</a>
-    <a onclick="showSection('downloads')" id="nav-downloads">[ DOWNLOADS ]</a>
-    <a onclick="showSection('logs')" id="nav-logs">[ LOGS ]</a>
-    <a onclick="showSection('warnings')" id="nav-warnings">[ WARNINGS ]</a>
-  </div>
-
-  <!-- OVERVIEW -->
-  <div id="overview" class="section active">
-    <div class="section-title">/// PROJECT: SIGNAL TOWER ///</div>
-
-    <div class="ascii-art">
-    ███████╗██╗ ██████╗ ███╗   ██╗ █████╗ ██╗     ███████╗
-    ██╔════╝██║██╔════╝ ████╗  ██║██╔══██╗██║     ██╔════╝
-    ███████╗██║██║  ███╗██╔██╗ ██║███████║██║     █████╗  
-    ╚════██║██║██║   ██║██║╚██╗██║██╔══██║██║     ██╔══╝  
-    ███████║██║╚██████╔╝██║ ╚████║██║  ██║███████╗███████╗
-    ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝╚══════╝
-    </div>
-
-    <p style="margin-bottom:15px;">
-      <span style="color:var(--term-amber)">>> PURPOSE:</span> High-frequency noise emitter capable of repelling 
-      hostile entities within a 6-chunk radius. Inaudible to human subjects.
-    </p>
-
-    <p style="margin-bottom:15px;">
-      <span style="color:var(--term-amber)">>> ORIGIN:</span> Recovered from fragmented data caches located 
-      in anomalous biomes. Decoded via base64 transmission protocol.
-    </p>
-
-    <p style="margin-bottom:15px;">
-      <span style="color:var(--term-amber)">>> STATUS:</span> <span style="color:var(--term-red)">SCHEMATIC INCOMPLETE</span> — 
-      Additional data required. See DOWNLOADS section.
-    </p>
-
-    <div class="warning">
-      <strong>⚠ CAUTION:</strong> Entity designated "The Locust" demonstrates 
-      aversion to emitted frequencies. Prolonged exposure may alter behavioral patterns. 
-      Do not assume safety is absolute.
-    </div>
-
-    <div style="margin-top:20px; border:1px solid var(--term-dim); padding:15px;">
-      <div class="section-title" style="border:none; padding:0;">/// TOWER SPECIFICATIONS ///</div>
-      <pre style="color:var(--term-dim); line-height:1.6; margin-top:10px;">
-Height:        12 blocks
-Base:          5x5 iron frame
-Core:          Redstone + Obsidian resonator
-Antenna:       Gold-conductive rod (4 blocks)
-Power:         Self-sustaining
-Effective:     96 block radius (6 chunks)
-      </pre>
-    </div>
-  </div>
-
-  <!-- CIPHER -->
-  <div id="cipher" class="section">
-    <div class="section-title">/// COORDINATE CIPHER ///</div>
-    <p style="color:var(--term-dim); margin-bottom:15px;">
-      Fragmented transmissions recovered from data caches use a coordinate-based encoding.
-      Each two-digit number maps to a position on the grid below.
-    </p>
-
-    <table class="grid-table">
-      <tr>
-        <th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
-      </tr>
-      <tr>
-        <th>1</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td>
-      </tr>
-      <tr>
-        <th>2</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td>
-      </tr>
-      <tr>
-        <th>3</th><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td>
-      </tr>
-      <tr>
-        <th>4</th><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>0</td><td>1</td>
-      </tr>
-      <tr>
-        <th>5</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
-      </tr>
-      <tr>
-        <th>6</th><td>9</td><td>.</td><td>-</td><td>_</td><td>/</td><td>:</td><td>@</td>
-      </tr>
-    </table>
-
-    <p style="color:var(--term-dim); margin-top:15px; font-size:14px;">
-      First digit = row. Second digit = column.<br>
-      Example: 23 = I, 45 = Z, 62 = .
-    </p>
-
-    <div class="warning" style="margin-top:20px;">
-      <strong>⚠ NOTE:</strong> Coordinates are scattered across multiple data fragments. 
-      Collect all fragments before attempting decryption. Use the decoder tool in DOWNLOADS.
-    </div>
-  </div>
-
-  <!-- DOWNLOADS -->
-  <div id="downloads" class="section">
-    <div class="section-title">/// AVAILABLE FILES ///</div>
-
-    <p style="margin-bottom:20px; color:var(--term-dim);">
-      The following files have been recovered from fragmented caches. 
-      Download and use locally.
-    </p>
-
-    <div style="border:1px solid var(--term-dim); padding:20px; margin-bottom:20px;">
-      <div style="color:var(--term-amber); margin-bottom:10px;">[ FILE_01 ] signal_decoder.py</div>
-      <p style="color:var(--term-dim); margin-bottom:15px; font-size:14px;">
-        Coordinate grid decoder. Python 3.6+, no dependencies.
-        Run locally, paste your collected coordinates.
-      </p>
-      <a href="https://github.com/winkeysed/python-decoder" target="_blank" class="download-btn">
-        [ DOWNLOAD DECODER ]
-      </a>
-    </div>
-
-    <div style="border:1px solid var(--term-dim); padding:20px; margin-bottom:20px;">
-      <div style="color:var(--term-amber); margin-bottom:10px;">[ FILE_02 ] tower_schematic.litematic</div>
-      <p style="color:var(--term-dim); margin-bottom:15px; font-size:14px;">
-        Signal tower construction data. Import into Litematica for in-world overlay.
-      </p>
-      <a href="https://google.com" target="_blank" class="download-btn">
-        [ DOWNLOAD SCHEMATIC ]
-      </a>
-    </div>
-
-    <div class="warning">
-      <strong>⚠ WARNING:</strong> Do not share decoded coordinates publicly. 
-      The source of these transmissions has not been verified.
-    </div>
-  </div>
-
-  <!-- LOGS -->
-  <div id="logs" class="section">
-    <div class="section-title">/// RECOVERED LOG FRAGMENTS ///</div>
-
-    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
-      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 1 — CYCLE 4 ]</div>
-      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Dr. V. Kessler</div>
-      <p>First prototype operational. Placed at the edge of the Faded Lands. Entities stopped at the perimeter. Just... stopped. Stared.</p>
-    </div>
-
-    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
-      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 12 — CYCLE 4 ]</div>
-      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Eng. M. Thorne</div>
-      <p>Third tower constructed. Frequency stable at 18.7 kHz. Dogs refuse to enter the safe zone. Maybe we are not meant to understand what we are building.</p>
-    </div>
-
-    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
-      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 27 — CYCLE 4 ]</div>
-      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Dr. V. Kessler</div>
-      <p>The Blooded Eye was sighted above Tower 2 today. It circled the antenna three times and left. I think it is studying us.</p>
-    </div>
-
-    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
-      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY 31 — CYCLE 4 ]</div>
-      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">[ DATA CORRUPTED ]</div>
-      <p style="color:var(--term-red);">they are not afraid of the noise they are waiting for something they are waiting for</p>
-    </div>
-
-    <div style="border-left:2px solid var(--term-dim); padding-left:15px; margin-bottom:20px;">
-      <div style="color:var(--term-dim); font-size:14px; margin-bottom:5px;">[ DAY ?? — CYCLE ? ]</div>
-      <div style="color:var(--term-red); font-size:14px; margin-bottom:5px;">Unknown</div>
-      <p style="color:var(--term-dim);">[ STATIC ] ...the towers were never meant to protect us. They were meant to <span style="color:var(--term-red)">[ SIGNAL ]</span> ...someone is listening...</p>
-    </div>
-  </div>
-
-  <!-- WARNINGS -->
-  <div id="warnings" class="section">
-    <div class="section-title">/// OPERATIONAL WARNINGS ///</div>
-
-    <div class="warning">
-      <strong>⚠ WARNING-001:</strong> Do not construct multiple towers within overlapping ranges. Frequency interference has been observed to <span style="color:var(--term-red)">attract</span> rather than repel.
-    </div>
-
-    <div class="warning">
-      <strong>⚠ WARNING-002:</strong> If The Locust is spotted inside a safe zone, the tower has failed. Do not attempt repair. Evacuate immediately.
-    </div>
-
-    <div class="warning">
-      <strong>⚠ WARNING-003:</strong> The Blooded Eye has never been observed blinking. If you see it close its eye, <span class="glitch" data-text="RUN">RUN</span>.
-    </div>
-
-    <div class="warning">
-      <strong>⚠ WARNING-004:</strong> This archive is not complete. Additional data fragments are required for full reconstruction.
-    </div>
-
-    <div style="margin-top:30px; color:var(--term-dim); text-align:center;">
-      <pre>
-    ╔═══════════════════════════════════════╗
-    ║  SIGNAL TOWER NETWORK — NODE OFFLINE  ║
-    ║  LAST SYNC: [UNKNOWN]                 ║
-    ║  NEXT CHECK: [PENDING]                ║
-    ╚═══════════════════════════════════════╝
-      </pre>
-    </div>
-  </div>
-
-  <div class="footer-spacer"></div>
+<div class="lang-header">
+  <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">[ LANG: RU | EN ]</button>
 </div>
 
-<div class="status-bar">
-  <span>ARCHIVE-7 // SIGNAL TOWER SCHEMATICS</span>
-  <span class="live">● LIVE CONNECTION</span>
-  <span id="clock">00:00:00</span>
+<pre class="lang-en">
+================================================================================
+  ARCHIVE-7 // FADED LANDS
+  RESTORED FROM FRAGMENTED DATA
+================================================================================
+</pre>
+<pre class="lang-ru">
+================================================================================
+  АРХИВ-7 // ВЫЦВЕТШИЕ ЗЕМЛИ
+  ВОССТАНОВЛЕНО ИЗ ФРАГМЕНТИРОВАННЫХ ДАННЫХ
+================================================================================
+</pre>
+
+<div class="nav">
+<a href="#overview"><span class="lang-en">[ OVERVIEW ]</span><span class="lang-ru">[ ОБЗОР ]</span></a>
+<a href="#cipher"><span class="lang-en">[ CIPHER ]</span><span class="lang-ru">[ ШИФР ]</span></a>
+<a href="#downloads"><span class="lang-en">[ DOWNLOADS ]</span><span class="lang-ru">[ ЗАГРУЗКИ ]</span></a>
+<a href="#logs"><span class="lang-en">[ LOGS ]</span><span class="lang-ru">[ ЖУРНАЛЫ ]</span></a>
+<a href="#warnings"><span class="lang-en">[ WARNINGS ]</span><span class="lang-ru">[ ПРЕДУПРЕЖДЕНИЯ ]</span></a>
+</div>
+
+<hr>
+
+<h1 id="overview">
+  <span class="lang-en">/// PROJECT: FADED LANDS ///</span>
+  <span class="lang-ru">/// ПРОЕКТ: ВЫЦВЕТШИЕ ЗЕМЛИ ///</span>
+</h1>
+
+<p>
+<span class="lang-en"><span style="color:#ff0">>> PURPOSE:</span> Document anomalous biome designated "Faded Lands". Recover research data from ARCHIVE-7 expedition. Reconstruct frequency-based entity repulsion technology.</span>
+<span class="lang-ru"><span style="color:#ff0">>> ЦЕЛЬ:</span> Документировать аномальный биом под кодовым названием "Выцветшие земли". Восстановить исследовательские данные экспедиции АРХИВ-7. Реконструировать технологию отпугивания сущностей на основе частоты.</span>
+</p>
+
+<p>
+<span class="lang-en"><span style="color:#ff0">>> ORIGIN:</span> First manifestation recorded 1924, Balkans. Stabilized 1926. ARCHIVE-7 established perimeter 1927. Project terminated 1929.</span>
+<span class="lang-ru"><span style="color:#ff0">>> ПРОИСХОЖДЕНИЕ:</span> Первое проявление зафиксировано в 1924 году, Балканы. Стабилизировано в 1926. АРХИВ-7 установил периметр в 1927. Проект закрыт в 1929.</span>
+</p>
+
+<p>
+<span class="lang-en"><span style="color:#ff0">>> STATUS:</span> <span style="color:#f00">DATA FRAGMENTED</span> — Additional fragments required. See DOWNLOADS section.</span>
+<span class="lang-ru"><span style="color:#ff0">>> СТАТУС:</span> <span style="color:#f00">ДАННЫЕ ФРАГМЕНТИРОВАНЫ</span> — Требуются дополнительные фрагменты. См. раздел ЗАГРУЗКИ.</span>
+</p>
+
+<div class="warning">
+<span class="lang-en"><strong>⚠ CAUTION:</strong> Faded Lands is not a place. It is a wound. Prolonged exposure causes physiological and psychological alterations. Do not assume safety is absolute.</span>
+<span class="lang-ru"><strong>⚠ ВНИМАНИЕ:</strong> Выцветшие земли — это не место. Это рана. Длительное воздействие вызывает физиологические и психологические изменения. Не считайте безопасность абсолютной.</span>
+</div>
+
+<h2>
+  <span class="lang-en">/// SUBJECT: ECHO ///</span>
+  <span class="lang-ru">/// ОБЪЕКТ: ЭХО ///</span>
+</h2>
+
+<p>
+<span class="lang-en">Former ARCHIVE-7 researcher. Adapted to Faded Lands environment through prolonged exposure. Body mutated: depigmentation, atrophied vocal cords, unknown organ producing repulsive frequency.</span>
+<span class="lang-ru">Бывший исследователь АРХИВ-7. Адаптировался к среде Выцветших земель через длительное воздействие. Тело мутировало: обесцвечивание, атрофия голосовых связок, неизвестный орган, производящий отпугивающую частоту.</span>
+</p>
+
+<p>
+<span class="lang-en">Current state: stationary, non-aggressive. Emits constant low-frequency hum (estimated 19.47 kHz). Entities within biome avoid proximity to subject.</span>
+<span class="lang-ru">Текущее состояние: неподвижный, неагрессивный. Излучает постоянный низкочастотный гул (приблизительно 19.47 кГц). Сущности внутри биома избегают близости к объекту.</span>
+</p>
+
+<p>
+<span class="lang-en">Location: central shelter, Faded Lands perimeter. Coordinates fragmented.</span>
+<span class="lang-ru">Местоположение: центральное убежище, периметр Выцветших земель. Координаты фрагментированы.</span>
+</p>
+
+<div class="note">
+<span class="lang-en">NOTE: Subject does not communicate via speech. Frequency emissions may carry informational content. Decoding in progress.</span>
+<span class="lang-ru">ПРИМЕЧАНИЕ: Объект не коммуницирует речью. Частотные излучения могут нести информационное содержание. Декодирование в процессе.</span>
+</div>
+
+<hr>
+
+<h1 id="cipher">
+  <span class="lang-en">/// COORDINATE CIPHER ///</span>
+  <span class="lang-ru">/// КООРДИНАТНЫЙ ШИФР ///</span>
+</h1>
+
+<p class="note">
+<span class="lang-en">Fragmented transmissions recovered from data caches use coordinate-based encoding. Each two-digit number maps to a position on the grid below.</span>
+<span class="lang-ru">Фрагментированные передачи, восстановленные из кэшей данных, используют кодирование на основе координат. Каждое двузначное число соответствует позиции в таблице ниже.</span>
+</p>
+
+<table>
+<tr>
+<th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+</tr>
+<tr>
+<th>1</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td>
+</tr>
+<tr>
+<th>2</th><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td>M</td><td>N</td>
+</tr>
+<tr>
+<th>3</th><td>O</td><td>P</td><td>Q</td><td>R</td><td>S</td><td>T</td><td>U</td>
+</tr>
+<tr>
+<th>4</th><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td><td>0</td><td>1</td>
+</tr>
+<tr>
+<th>5</th><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+</tr>
+<tr>
+<th>6</th><td>9</td><td>.</td><td>-</td><td>_</td><td>/</td><td>:</td><td>@</td>
+</tr>
+</table>
+
+<p class="note">
+<span class="lang-en">First digit = row. Second digit = column.<br>Example: 23 = I, 45 = Z, 62 = .<br>Collect all fragments before attempting decryption.</span>
+<span class="lang-ru">Первая цифра = строка. Вторая цифра = столбец.<br>Пример: 23 = I, 45 = Z, 62 = .<br>Соберите все фрагменты перед попыткой расшифровки.</span>
+</p>
+
+<div class="warning">
+<span class="lang-en"><strong>⚠ NOTE:</strong> Coordinates are scattered across multiple data fragments. Use the decoder tool in DOWNLOADS.</span>
+<span class="lang-ru"><strong>⚠ ПРИМЕЧАНИЕ:</strong> Координаты разбросаны по нескольким фрагментам данных. Используйте инструмент декодирования в разделе ЗАГРУЗКИ.</span>
+</div>
+
+<hr>
+
+<h1 id="downloads">
+  <span class="lang-en">/// AVAILABLE FILES ///</span>
+  <span class="lang-ru">/// ДОСТУПНЫЕ ФАЙЛЫ ///</span>
+</h1>
+
+<p class="note">
+<span class="lang-en">The following files have been recovered from fragmented caches. Download and use locally.</span>
+<span class="lang-ru">Следующие файлы были восстановлены из фрагментированных кэшей. Загрузите и используйте локально.</span>
+</p>
+
+<pre class="lang-en">
+[ FILE_01 ] signal_decoder.py
+  Coordinate grid decoder. Python 3.6+, no dependencies.
+  Run locally, paste your collected coordinates.
+
+  <a href="https://github.com/winkeysed/python-decoder">[ DOWNLOAD DECODER ]</a>
+
+[ FILE_02 ] research_complex.litematic
+  Research complex construction data. Import into Litematica for in-world overlay.
+  Structure: resonator, 3x antenna, monitor, power source.
+
+  <a href="#">[ DOWNLOAD SCHEMATIC ]</a>
+</pre>
+
+<pre class="lang-ru">
+[ ФАЙЛ_01 ] signal_decoder.py
+  Декодер координатной сетки. Python 3.6+, без зависимостей.
+  Запустите локально, вставьте собранные координаты.
+
+  <a href="https://github.com/winkeysed/python-decoder">[ ЗАГРУЗИТЬ ДЕКОДЕР ]</a>
+
+[ ФАЙЛ_02 ] research_complex.litematic
+  Данные постройки исследовательского комплекса. Импортируйте в Litematica для наложения в мире.
+  Структура: резонатор, 3 антенны, монитор, источник питания.
+
+  <a href="#">[ ЗАГРУЗИТЬ СХЕМАТИКУ ]</a>
+</pre>
+
+<div class="warning">
+<span class="lang-en"><strong>⚠ WARNING:</strong> Do not share decoded coordinates publicly. The source of these transmissions has not been verified.</span>
+<span class="lang-ru"><strong>⚠ ПРЕДУПРЕЖДЕНИЕ:</strong> Не публикуйте расшифрованные координаты. Источник этих передач не проверен.</span>
+</div>
+
+<hr>
+
+<h1 id="logs">
+  <span class="lang-en">/// RECOVERED LOG FRAGMENTS ///</span>
+  <span class="lang-ru">/// ВОССТАНОВЛЕННЫЕ ФРАГМЕНТЫ ЖУРНАЛА ///</span>
+</h1>
+
+<pre class="lang-en">
+[ 1927-10-14 ] Dr. E. Whitmore
+Subject located at sector 7. Depigmentation complete. No response to verbal
+stimuli. Subject emits low-frequency hum. Dogs refuse to approach. We are
+calling it "Echo" for now. It responds to the name. Or maybe it just responds
+to sound.
+
+---
+
+[ 1927-11-03 ] Eng. A. Vesci
+First resonator prototype operational. Placed 8 blocks from subject.
+Frequency amplification confirmed. Safe zone expanded from 8 to 16 blocks.
+Subject's hum intensified during calibration. Not distress. Something else.
+
+---
+
+[ 1927-12-19 ] Dr. E. Whitmore
+Third antenna installed. Subject has not moved in 47 days. Food intake
+unknown. Respiration undetectable. But the hum continues. The hum never stops.
+
+---
+
+[ 1928-02-08 ] [ AUTHOR UNKNOWN ]
+The complex is working. The frequency keeps them away. But I keep thinking:
+what if they are not afraid? What if they are listening? What if they are
+learning the frequency?
+
+---
+
+[ 1928-04-22 ] Dr. E. Whitmore
+[ DATA CORRUPTED ] ...they are not afraid of the noise they are waiting...
+...the complex was never meant to protect us it was meant to...
+
+---
+
+[ 1929-01-?? ] [ AUTHOR UNKNOWN ]
+[ STATIC ] ...Echo is not the source of the frequency. Echo is the antenna.
+Something else is broadcasting through him. Something inside the wound.
+...someone is listening...
+</pre>
+
+<pre class="lang-ru">
+[ 1927-10-14 ] Д-р Э. Уитмор
+Объект обнаружен в секторе 7. Обесцвечивание завершено. Нет реакции на
+вербальные стимулы. Объект излучает низкочастотный гул. Собаки отказываются
+подходить. Пока называем его "Эхо". Он реагирует на имя. Или, может, он просто
+реагирует на звук.
+
+---
+
+[ 1927-11-03 ] Инж. А. Вески
+Первый прототип резонатора работает. Установлен в 8 блоках от объекта.
+Усиление частоты подтверждено. Безопасная зона расширена с 8 до 16 блоков.
+Гул объекта усилился во время калибровки. Не стресс. Что-то другое.
+
+---
+
+[ 1927-12-19 ] Д-р Э. Уитмор
+Третья антенна установлена. Объект не двигался 47 дней. Потребление пищи
+неизвестно. Дыхание не обнаружено. Но гул продолжается. Гул никогда не
+останавливается.
+
+---
+
+[ 1928-02-08 ] [ АВТОР НЕИЗВЕСТЕН ]
+Комплекс работает. Частота держит их на расстоянии. Но я всё думаю: а что,
+если они не боятся? А что, если они слушают? А что, если они изучают частоту?
+
+---
+
+[ 1928-04-22 ] Д-р Э. Уитмор
+[ ДАННЫЕ ПОВРЕЖДЕНЫ ] ...они не боятся шума они ждут...
+...комплекс никогда не был предназначен для защиты нас он был предназначен для...
+
+---
+
+[ 1929-01-?? ] [ АВТОР НЕИЗВЕСТЕН ]
+[ СТАТИКА ] ...Эхо не источник частоты. Эхо — антенна.
+Что-то другое вещает через него. Что-то внутри раны.
+...кто-то слушает...
+</pre>
+
+<hr>
+
+<h1 id="warnings">
+  <span class="lang-en">/// OPERATIONAL WARNINGS ///</span>
+  <span class="lang-ru">/// ОПЕРАЦИОННЫЕ ПРЕДУПРЕЖДЕНИЯ ///</span>
+</h1>
+
+<div class="warning">
+<span class="lang-en"><strong>⚠ WARNING-001:</strong> Do not construct multiple resonators within overlapping ranges. Frequency interference has been observed to <span style="color:#f00">attract</span> rather than repel.</span>
+<span class="lang-ru"><strong>⚠ ПРЕДУПРЕЖДЕНИЕ-001:</strong> Не устанавливайте несколько резонаторов в зонах перекрытия. Зафиксировано, что интерференция частот <span style="color:#f00">привлекает</span>, а не отпугивает.</span>
+</div>
+
+<div class="warning">
+<span class="lang-en"><strong>⚠ WARNING-002:</strong> If entities are spotted inside a safe zone, the resonator has failed. Do not attempt repair. Evacuate immediately.</span>
+<span class="lang-ru"><strong>⚠ ПРЕДУПРЕЖДЕНИЕ-002:</strong> Если сущности замечены внутри безопасной зоны, резонатор вышел из строя. Не пытайтесь починить. Немедленно эвакуируйтесь.</span>
+</div>
+
+<div class="warning">
+<span class="lang-en"><strong>⚠ WARNING-003:</strong> Subject "Echo" has never been observed sleeping. If the hum ceases, <span style="color:#f00">EVACUATE ALL PERSONNEL</span>.</span>
+<span class="lang-ru"><strong>⚠ ПРЕДУПРЕЖДЕНИЕ-003:</strong> Объект "Эхо" никогда не наблюдался спящим. Если гул прекратится, <span style="color:#f00">ЭВАКУИРУЙТЕ ВЕСЬ ПЕРСОНАЛ</span>.</span>
+</div>
+
+<div class="warning">
+<span class="lang-en"><strong>⚠ WARNING-004:</strong> This archive is not complete. Additional data fragments are required for full reconstruction.</span>
+<span class="lang-ru"><strong>⚠ ПРЕДУПРЕЖДЕНИЕ-004:</strong> Этот архив неполон. Для полной реконструкции требуются дополнительные фрагменты данных.</span>
+</div>
+
+<hr>
+
+<pre class="lang-en">
+    ╔═══════════════════════════════════════╗
+    ║  ARCHIVE-7 NODE — CONNECTION LOST     ║
+    ║  LAST SYNC: [1929-03-15]              ║
+    ║  NEXT CHECK: [PENDING]                ║
+    ╚═══════════════════════════════════════╝
+</pre>
+
+<pre class="lang-ru">
+    ╔═══════════════════════════════════════╗
+    ║  УЗЕЛ АРХИВ-7 — СВЯЗЬ ПОТЕРЯНА        ║
+    ║  ПОСЛЕДНЯЯ СИНХРОНИЗАЦИЯ: [1929-03-15] ║
+    ║  СЛЕДУЮЩАЯ ПРОВЕРКА: [В ОЖИДАНИИ]      ║
+    ╚═══════════════════════════════════════╝
+</pre>
+
+<div class="footer">
+<span class="lang-en">
+ARCHIVE-7 // FADED LANDS<br>
+RESTORED FROM FRAGMENTED DATA — CLEARANCE LEVEL: SURVIVOR<br>
+</span>
+<span class="lang-ru">
+АРХИВ-7 // ВЫЦВЕТШИЕ ЗЕМЛИ<br>
+ВОССТАНОВЛЕНО ИЗ ФРАГМЕНТИРОВАННЫХ ДАННЫХ — УРОВЕНЬ ДОПУСКА: ВЫЖИВШИЙ<br>
+</span>
+<span class="blink">_</span>
 </div>
 
 <script>
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('nav-' + id).classList.add('active');
-}
-
-function updateClock() {
-  const now = new Date();
-  document.getElementById('clock').textContent = now.toTimeString().split(' ')[0];
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-setInterval(() => {
-  const glitches = document.querySelectorAll('.glitch');
-  const target = glitches[Math.floor(Math.random() * glitches.length)];
-  if (target) {
-    target.style.opacity = '0.7';
-    setTimeout(() => { target.style.opacity = '1'; }, 100);
+function setLanguage(lang) {
+  if (lang === 'ru') {
+    document.body.classList.remove('lang-en');
+    document.body.classList.add('lang-ru');
+    document.documentElement.lang = 'ru';
+    document.title = 'АРХИВ-7 // ВЫЦВЕТШИЕ ЗЕМЛИ';
+    document.getElementById('langBtn').innerHTML = '[ LANG: RU | EN ]';
+    localStorage.setItem('archive7_lang', 'ru');
+  } else {
+    document.body.classList.remove('lang-ru');
+    document.body.classList.add('lang-en');
+    document.documentElement.lang = 'en';
+    document.title = 'ARCHIVE-7 // FADED LANDS';
+    document.getElementById('langBtn').innerHTML = '[ LANG: EN | RU ]';
+    localStorage.setItem('archive7_lang', 'en');
   }
-}, 3000);
+}
 
-const messages = [
-  'SCANNING FREQUENCY...',
-  'ENTITY DETECTED: NONE',
-  'SIGNAL STRENGTH: 87%',
-  'BUFFERING FRAGMENT_3...',
-  'TOWER STATUS: STANDBY',
-  'ANOMALY CHECK: CLEAR'
-];
-setInterval(() => {
-  const bar = document.querySelector('.status-bar span:first-child');
-  const original = 'ARCHIVE-7 // SIGNAL TOWER SCHEMATICS';
-  bar.textContent = messages[Math.floor(Math.random() * messages.length)];
-  setTimeout(() => { bar.textContent = original; }, 2000);
-}, 15000);
+function toggleLanguage() {
+  if (document.body.classList.contains('lang-ru')) {
+    setLanguage('en');
+  } else {
+    setLanguage('ru');
+  }
+}
+
+// Initial language setup
+(function() {
+  var savedLang = localStorage.getItem('archive7_lang') || 'ru';
+  setLanguage(savedLang);
+})();
 </script>
 
 </body>
